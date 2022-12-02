@@ -1,0 +1,19 @@
+#!/usr/bin/sh
+day1() {
+	in="$(xclip -sel clip -o)"
+	s="$(echo "$in""\
+		"| awk '!/^$/{i+=$1} /^$/{print i; i=0;} END{print i; i=0;}'"\
+		"| sort -nr)"
+	echo "$s" | head -1
+	echo "$s" | head -3 | paste -sd+ - | bc
+	#echo "$in" \
+	#	| awk '!/^$/{i+=$1} /^$/{print i; i=0;} END{print i; i=0;}' \
+	#	| sort -nr \
+	#	| tee \
+	#		>(head -1) \
+	#		>(head -3 | datamash sum 1) \
+	#	1>/dev/null
+}
+
+
+# vim: ft=sh

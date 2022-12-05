@@ -43,9 +43,20 @@ day4 ← {
 	⎕←p2←+⌿((e1≥s2)∧(s1≤e2))∨((s2≥e1)∧(e2≤s1))
 }
 
+day5 ← {
+	⎕←'--------- [day5]'
+	s m ← (×∘≢¨⊆⊢)⍵
+	mv ← ⎕D∘(⍎¨∊⍨⊆⊢)¨m
+	r ← ' '(⊂¯1↓≠⊢⍤⌿⊢)⍤1⊢(⊂⍸' '≠(≢⊃⊢)s)⌷⍉↑s
+	l ← ⌽mv,⍨⊂r
+	⎕←p1←⊃¨⊃{(n f t)←⍺ ⋄ (f⊃h)↓⍨←≢(t⊃h),⍨←⌽n(⌊∘≢↑⊢)f⊃h←⍵ ⋄ h}⌿ l
+	⎕←p2←⊃¨⊃{(n f t)←⍺ ⋄ (f⊃h)↓⍨←≢(t⊃h),⍨←⊢n(⌊∘≢↑⊢)f⊃h←⍵ ⋄ h}⌿ l
+}
+
 day1 FL indir,'/1.in'
 day2 FL indir,'/2.in'
 day3 FL indir,'/3.in'
 day4 FL indir,'/4.in'
+day5 FL indir,'/5.in'
 
 ⍝ vim: ft=apl

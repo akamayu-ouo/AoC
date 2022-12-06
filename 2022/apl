@@ -47,11 +47,19 @@ day5 ← {
 	⎕←'--------- [day5]'
 	s m ← (×∘≢¨⊆⊢)⍵
 	mv ← ⎕D∘(⍎¨∊⍨⊆⊢)¨m
-	r ← ' '(⊂¯1↓≠⊢⍤⌿⊢)⍤1⊢(⊂⍸' '≠↑⊢⌿s)⌷⍉↑s
+	r ← ' '(⊂¯1↓≠⊢⍤⌿⊢)⍤1⊢(⍸¨' '≠⊢⌿s)⌷⍉↑s
 	l ← ⌽mv,⍨⊂r
 	_p ← {(n f t)←⍺ ⋄ (f⊃h)↓⍨←≢(t⊃h),⍨←⍺⍺n(⌊∘≢↑⊢)f⊃h←⍵ ⋄ h}
 	⎕←p1←⊃¨↑ ⌽_p⌿ l
 	⎕←p2←⊃¨↑ ⊢_p⌿ l
+}
+
+day6 ← {
+	⎕←'--------- [day6]'
+	in ← ⊃⍵
+	f ← ≢¨⍤(∪⌿) ⍳ ⊣
+	⎕←p1← 4 f in
+	⎕←p2←14 f in
 }
 
 day1 FL indir,'/1.in'
@@ -59,5 +67,6 @@ day2 FL indir,'/2.in'
 day3 FL indir,'/3.in'
 day4 FL indir,'/4.in'
 day5 FL indir,'/5.in'
+day6 FL indir,'/6.in'
 
 ⍝ vim: ft=apl

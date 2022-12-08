@@ -63,11 +63,22 @@ day6 ← {
 	⎕←p2←14 f in
 }
 
+day7 ← {} ⍝ WIP
+
+day8 ← {
+	⎕←'--------- [day8]'
+	in ← ⍎¨↑⍵
+	_erot_ ← { ⊃⍺⍺⌿ ⍉∘⌽⍤⊢⍀ ⍵⍵¨ ⌽∘⍉⍤⊢⍀ 4⌿⊂⍵ }
+	⎕←p1←+⌿∊ ∨_erot_{⍵>(⍴⍵)⍴0⍪⌈⍀⍵} 1+in
+	⎕←p2←⌈⌿∊ ×_erot_(↑⊂{(⍵-⍨≢⍺)@(=∘0), ⍉⍸⍤1⍉ <⍀ ⍵(⌷≤⍤1↓)⍺}¨⍳∘≢) in
+}
+
 day1 FL indir,'/1.in'
 day2 FL indir,'/2.in'
 day3 FL indir,'/3.in'
 day4 FL indir,'/4.in'
 day5 FL indir,'/5.in'
 day6 FL indir,'/6.in'
+day8 FL indir,'/8.in'
 
 ⍝ vim: ft=apl

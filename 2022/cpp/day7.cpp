@@ -2,7 +2,6 @@
 #include <vector>
 #include <string>
 #include <string_view>
-#include <optional>
 #include <range/v3/all.hpp>
 
 namespace rg = ranges;
@@ -10,24 +9,16 @@ namespace rv = ranges::views;
 
 struct Node {
 	private:
-		std::optional<Node*> findChild(std::string_view n) const {
-			auto it = rg::find(down, n,
-			              [](auto*p)->std::string_view{return p->name;});
-			if(it == rg::end(down)) return {};
-			else return {*it};
-		}
 	public:
-		std::string name{};
 		size_t size{0};
 		Node* up{nullptr};
 		std::vector<Node*> down{};
 		
-		Node(std::string_view n) : name {n}, up{this} {}
-		Node(std::string_view n, Node* u) : name {n}, up{u} {}
+		Node() : up{this} {}
+		Node(Node* u) : up{u} {}
 		
-		Node* addDir(std::string_view n) {
-			if(auto o = findChild(n)) return *o;
-			down.push_back(new Node(n, this));
+		Node* addDir() {
+			down.push_back(new Node(this));
 			return down.back();
 		}
 		
@@ -55,13 +46,13 @@ auto split(std::string_view sv) {
 }
 
 int main (void) {
-	auto r = Node{"/"}, *now{&r};
+	auto r = Node{}, *now{&r};
 	for(std::string_view sv : rg::getlines(std::cin)) {
 		if(sv.starts_with('$')){
 			sv.remove_prefix(2);
 			if(sv.starts_with("cd")){
 				auto to = split(sv).second;
-				now = (to == "..") ? now->up : now->addDir(to);
+				now = (to == "..") ? now->up : now->addDir();
 			}
 		}else if(std::isdigit(sv.front())){
 			auto sz = split(sv).first;

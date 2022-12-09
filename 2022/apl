@@ -73,6 +73,22 @@ day8 ← {
 	⎕←p2←⌈⌿∊ ×_erot_(↑⊂{(⍵-⍨≢⍺)@(=∘0), ⍉⍸⍤1⍉ <⍀ ⍵(⌷≤⍤1↓)⍺}¨⍳∘≢) in
 }
 
+day9 ← {
+	⎕←'--------- [day9]'
+	dd ← ↑ (1 0) (¯1 0) (0 1) (0 ¯1)
+	sim ← {
+		s←⊂0 0
+		r←{
+			a←⊃(⊢,⍨∘⊂⊣-(×⊢×2∊|)⍤-∘⊃)⌿⌽(⊂(⍺⌷dd)∘+¨)@1⊢⍵
+			⌽a⊣s,←1↑a
+		}⌿⌽(⊂(1+⍺)⌿s),⍵
+		⍴∪s
+	}
+	in ← ∊(/⍨/) ⍉(⍎¨@2)('RLUD'∘⍳¨@1)⍉ ↑' '∘(≠⊆⊢)¨⍵
+	⎕←p1←1 sim in
+	⎕←p2←9 sim in
+}
+
 day1 FL indir,'/1.in'
 day2 FL indir,'/2.in'
 day3 FL indir,'/3.in'
@@ -80,5 +96,6 @@ day4 FL indir,'/4.in'
 day5 FL indir,'/5.in'
 day6 FL indir,'/6.in'
 day8 FL indir,'/8.in'
+day9 FL indir,'/9.in'
 
 ⍝ vim: ft=apl

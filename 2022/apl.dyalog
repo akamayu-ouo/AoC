@@ -87,6 +87,13 @@ day9 ← {
 	⎕←p2←9 sim in
 }
 
+day10 ← {
+	⎕←'--------- [day9]'
+	v ← 1,(1,'na'⍳⊃¨⍵)⌿(+⍀1,{0=≢⍵:0⋄⍎⍵}¨5∘↓¨⍵)
+	⎕←p1←v(⊢+.×I)40×.5-⍨⍳6
+	⎕←p2←'.#'I 6 40⍴1≥|(⊢-40|⍳∘≢)v ⊣ ⎕io←0
+}
+
 day1 FL indir,'/1.in'
 day2 FL indir,'/2.in'
 day3 FL indir,'/3.in'
@@ -95,5 +102,6 @@ day5 FL indir,'/5.in'
 day6 FL indir,'/6.in'
 day8 FL indir,'/8.in'
 day9 FL indir,'/9.in'
+day10 FL indir,'/10.in'
 
 ⍝ vim: ft=apl

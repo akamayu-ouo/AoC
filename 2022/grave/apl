@@ -103,5 +103,12 @@ day11 ← { ⍝ Kind of slow
 	p1 p2
 }
 
+day12 ← {
+	⍝ First attempt
+	fx ← 'a'⍨@(=∘'S')⊢'z'⍨@(=∘'E')⊢
+	st ← ⊂⍤⊢⌺3 3
+	p1 ← {h ← ⎕UCS fx ⍵ ⋄ s e ← 'S' 'E'=¨(⊂⍵) ⋄ f ← (1≥-∘st⍨)h ⋄ n ← 0 ⋄ n ⊣ {n+←1⋄ (1∊,I(2×⍳4)⍨)¨f∧st ⍵ }⍣{1∊⍺∧e} ⊢ s } ↑⍵
+	p2 ← {h ← ⎕UCS fx ⍵ ⋄ a e ← 'a' 'E'=¨(⊂⍵) ⋄ f ← (1≤-⍨∘st⍨)h ⋄ n ← 0 ⋄ n ⊣ {n+←1⋄ (1∊,I(2×⍳4)⍨)¨f∧st ⍵ }⍣{1∊⍺∧a} ⊢ e } ↑⍵
+}
 
 ⍝ vim: ft=apl

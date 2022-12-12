@@ -128,6 +128,21 @@ day11 ← {
 	p1 p2
 }
 
-Test¨,⍳11
+day12 ← {
+	st ← ((⊂2×⍳4)⌷,)¨{⊂⍵}⌺3 3
+	fx ← 'a'⍨@(=∘'S') 'z'⍨@(=∘'E')
+	_to_ ← {
+		f ← ∊(1≥st-⊢) ⎕UCS fx ⍵
+		⍝f ← (1≥st-⊢) ⎕UCS fx ⍵
+		s e ← (⍺⍺ ⍵⍵) ∊⍨¨ ⊂⍵ 
+		n ← 0 ⋄ n ⊣ {n+←1 ⋄ ∨/(4,⍨⍴⍵)⍴f∧∊st ⍵}⍣(1∊e∧⊣) s
+		⍝           {n+←1 ⋄ 1∊¨f∧st ⍵}⍣(1∊e∧⊣) s ⍝ simplier but slower
+	}
+	p1 ← ('E' _to_ 'S') ↑⍵
+	p2 ← ('E' _to_ 'Sa') ↑⍵
+	p1 p2
+}
+
+Test¨,12
 
 ⍝ vim: ft=apl

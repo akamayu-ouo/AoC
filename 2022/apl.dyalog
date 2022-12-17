@@ -13,7 +13,7 @@ Test ← {
 	⍺ ← '.in'
 	n←⍕⍵
 	tab ← '    ' ,⍤1 ⍕
-	⎕pp←12
+	⎕pp←20
 	⎕←'--------- [day',n,']'
 	p1 p2 ← ⍎'day',n,' FL indir,''/',n,⍺,''''
 	⎕←'+ part 1:'
@@ -166,26 +166,32 @@ day14 ← {
 	p1 p2
 }
 
-day15 ← { ⍝ p2 is extreamly slow
-     ⎕IO ← 0
-     bf ← {⍺[1]<⍵[0]-1}
-     mg ← (↓∪)(∨.∧⍣≡⍨∘.(bf⍱bf⍨)⍨)
-     (Sx Sy Bx By) ← ⊂[0]↑('-',⎕D)∘(⍎¨∊⍨⊆⊢)¨⍵
-     d ← +⌿↑|Sx Sy-Bx By
-     sg ← ((⌊⌿,⌈⌿)∘∊¨ mg ⊢⍤⌿¨ ⊂)∘(≥∘0⊢⍤⌿Sx(-,+)¨⊢)d-Sy|⍤-⊢
-     p1 ← {
-         n←1+-⍨/r←I∘⍋⍨∊sg ⍵
-         n-+/~2|r⍸∪(⍵=By)/Bx
-     } 2000000
-	 1: p1 'Too slow'
-     p2 ← 4000000{
-         s←,0⌈⍺⌊sg ⍵
-         s≢,⊂0 ⍺:1 4000000+.×⍵,1+1⊃I∘⍋⍨∊s
-         ⍺ ∇ ⍵+1
-     } 0
-     p1 p2
+day15 ← { ⍝ Part 2 needs ~ 10 sec
+	⎕io ← 0
+	(Sx Sy Bx By) ← ⊂[0]↑('-',⎕D)∘(⍎¨∊⍨⊆⊢)¨⍵
+	zo ← 0 1⍴⍨≢
+	d ← +⌿↑|Sx Sy-Bx By
+	rg ← ↑(⊂0 1)+Sx(-,+)¨d-Sy|⍤-⊢ ⍝ Ranges that each sensor covers
+	vd ← </⊢⍤⌿⊢                   ⍝ Valid ranges
+	kl ← (I∘⍋⍨ ⊢,zo) ⍪∘,          ⍝ Part of Klee's algo
+	p1 ← {
+		a b ← ↓⍉kl vd rg ⍵        ⍝ a: x-coordinates, b: start or end
+		se ← (1,2∨/0=+\¯1*b)⌿a    ⍝ Ranges: start1 end1 start2 end2 ...
+		ln ← +/-⍨/↑(~∘zo⊂⊢)se     ⍝ # Covered cells
+		bc ← +/~2|se⍸∪Bx⌿⍨By=⍵    ⍝ # Covered beacons
+		ln-bc
+	} 2000000
+	1:p1 'Too Slow'
+	N ← 4000000 ⊣ dr ← (1 ¯1)(¯1 1)
+	p2 ← 0 {
+		a b ← ↓⍉kl 0⌈N⌊ vd ⍵  ⍝ a: x-coordinates, b: start or end
+		fe ← (0⍳⍨+\¯1*b)⊃a    ⍝ The firs non-covered x-coordinate
+		fe≢N:⍺+4000000×fe
+		(⍺+1) ∇ ⍵+↑dr[⍺<Sy]
+	} rg 0
+	p1 p2
 }
 
-Test¨,⍳15
+Test¨,15
 
 ⍝ vim: ft=apl

@@ -192,6 +192,21 @@ day15 ← { ⍝ Part 2 needs ~ 10 sec
 	p1 p2
 }
 
-Test¨,15
+day16 ← {⍬⍬} ⍝WIP
+
+day17 ← {⍬⍬} ⍝ WIP
+
+day18 ← {
+	SW ← {⍺⍪⍵⍪⍺}
+	WP ← {(⍴⍴⍵)(⍺{⍺=0:⍵⋄(⍺-1)(⍺⍺∇∇)(⍺⍺(SW⍤⍺)⍵)})⍵}
+	NB ← ⊖⍤1¨,⊖⍤2¨,⊖⍤3¨
+	SA ← +/∘∊ ⊂ ≠¨ 1 NB ⊂
+	blk ← (⍸⍣¯1) ⎕io + I∘⍋⍨ ⍎¨⍵
+	p1 ← SA 0 WP blk
+	p2 ← SA (~ 0 WP blk) (⊣ ∧ ¯1 1 ∨⌿∘↑⍤NB ⊂⍤⊢)⍣≡ 1 WP 0∧blk
+	p1 p2
+}
+
+Test¨,18
 
 ⍝ vim: ft=apl

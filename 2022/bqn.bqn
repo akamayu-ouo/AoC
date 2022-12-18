@@ -21,8 +21,26 @@ Day3 ← {
 	•Show 2‿∘⊸⥊¨ 10↑𝕩
 }
 
-Day1 •FLines "./input/1.in"
-Day2 •FLines "./input/2.in"
-Day3 •FLines "./input/3.in"
+Day12 ← { # Translated from apl solution
+	St ← > ⟨«,«˘,»,»˘⟩ {𝕎𝕩}¨ <  # Nudge is awesome !
+	_rw_ ← {𝕩+(𝕩=𝕗)×(𝕘-𝕗)}      # Replaced with
+	Fx ← ('S'_rw_'a') ('E'_rw_'z')
+	_to_ ← {
+		s‿e ← (<𝕩) ∊¨ 𝕗‿𝕘
+		f ← (1≥St-⎉2⊢) (Fx-@˜) 𝕩
+		0 { ∨´⥊e∧𝕩 ? 𝕨 ; (𝕨+1) 𝕊 (∨˝f∧St𝕩) } s
+		# Note: The right operand of ⍟ calculates the number
+		#       of iterations, while the one in ⍣ determines
+		#       the end condition by the results from two
+		#       adjacent iterations.
+	}
+	•Show ( "E" _to_  "S" ) >𝕩
+	•Show ( "E" _to_ "Sa" ) >𝕩
+}
+
+#Day1 •FLines "./input/1.in"
+#Day2 •FLines "./input/2.in"
+#Day3 •FLines "./input/3.in"
+Day12 •FLines "./input/12.in"
 
 # vim: ft=bqn

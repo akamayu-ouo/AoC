@@ -207,6 +207,26 @@ day18 ← {
 	p1 p2
 }
 
+day24 ← {
+	⎕io ← 0
+	in ← ↑⍵
+	bz ← '<>^v'=¨⊂(1↓⍉∘⊖)⍣4⊢in
+	wl ← '#'=in
+	ed ← ⊖⌽ st ← ¯1⌽(⍴in)↑1
+	BL ← 1 ¯1∘(⊣(⊖¨@2 3)(⌽¨@0 1))
+	SM ← {
+		(n ex bz)←⍵
+		⍺∨.∧⍥,ex: n bz
+		bz ← BL bz
+		av ← ~wl∨¯1⊖¯1⌽(⍴⍺)↑⊃∨⌿bz
+		ex ← av∧⊃∨⌿1 ¯1(⊢,⊖¨,⌽¨)⊂ex
+		⍺ ∇ (n+1) ex bz
+	}
+	(p1 bz) ← ed SM  0 st bz
+	(tt bz) ← st SM p1 ed bz
+	(p2 bz) ← ed SM tt st bz
+	p1 p2
+}
 
 day25 ← {
 	⎕io ← 0

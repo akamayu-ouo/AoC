@@ -21,6 +21,16 @@ Day3 ← {
 	•Show 2‿∘⊸⥊¨ 10↑𝕩
 }
 
+Day5 ← {
+	Dec ← {𝕨|>⌊∘÷`⌾⌽𝕨«˜<𝕩} # From BQN-Dyalog dict..
+	stack ← (' '⊸≠<∘/˘⊢) (1+4×↕9) ⊏ (⍉>8↑𝕩)
+	moves ← (<0‿1‿1) -˜ (100‿10‿10⊸Dec∘•BQN∊⟜"0987654321"/⊢)¨10↓𝕩
+	_step ← {	⟨n,f,t⟩ ← 𝕨 ⋄ n⊸↓⌾(f⊸⊑) (𝔽n↑f⊑𝕩)⊸∾⌾(t⊸⊑) 𝕩 }
+	_proc ← {⊑¨ 𝔽_step´⌽(<𝕨)∾𝕩}
+	•Show stack ⌽_proc moves
+	•Show stack ⊢_proc moves
+}
+
 Day12 ← { # Translated from apl solution
 	St ← > ⟨«,«˘,»,»˘⟩ {𝕎𝕩}¨ <  # Nudge is awesome !
 	_rw_ ← {𝕩+(𝕩=𝕗)×(𝕘-𝕗)}      # Replaced with

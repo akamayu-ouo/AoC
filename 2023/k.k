@@ -30,3 +30,19 @@ F:!:+/~:^:.:*:|:":"\"?"/"|"\
 d04a:+/2/'~F'
 M:{1+(!#x)+'F'x}
 d04b:{+/#'{,/x@y}[M x]\!#x}
+
+
+S:.:*:|:":"\*:                            / [S]eeds
+P:.''2_'1_{x@.=+\""~/:x}                  / [P]arse
+G:,/''+'{x@<x}'({(y,y+z;(x-y),0)}.)''     / [G]rouping
+O:{x@<x}0N 2#                             / [O]rdered
+sub:{((x,y)@<x,y)@&|':2=+\(,/2 1*1-2*2!!'(#x),#y)@<x,y} / subtraction between two sets of non-overlapped intervals
+d05a:&/{(S@x){x+0^(*|y)@(*y)'x}/G@P@x}
+d05b:&/{(,/+\'O@S@x){,/(=/')_O@g,f+{2}#0^(*|y)@*'0N 2#(*y)'f:sub[x;g:sub[x;*y]]}/ G@P@x}
+/                      +-+--+     ^                        ^       ^
+/                        |        |                        |   g is x without *y
+/                        |    apply shift     f is intersection of x and *y
+/                        |
+/                   Remove empty
+/ BUG in `sub`: sub[2 4 3 7 4 6;!0]  --> 2 3 4 4 6 7
+

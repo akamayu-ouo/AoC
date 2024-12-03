@@ -29,3 +29,15 @@ def d02b(lines: list[str]):
     valid = lambda x: not (x - {1, 2, 3}) or not (x - {-1, -2, -3})
     check = lambda x: any(map(valid, map(diffs, grows(parse(x)))))
     return sum(map(check, lines))
+
+
+def d03a(whole: str):
+    from re import findall
+    from operator import mul
+
+    return eval("+".join(re.findall(r"mul\(\d+,\d+\)", whole)))
+
+
+def d03b(whole: str):
+    valid = lambda x: not x.startswith("n't()")
+    return d03a("".join(filter(valid, (" " + whole).split("do"))))

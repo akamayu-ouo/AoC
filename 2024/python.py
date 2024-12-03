@@ -35,9 +35,9 @@ def d03a(whole: str):
     from re import findall
     from operator import mul
 
-    return eval("+".join(re.findall(r"mul\(\d+,\d+\)", whole)))
+    return eval("+".join(findall(r"mul\(\d+,\d+\)", whole)))
 
 
 def d03b(whole: str):
-    valid = lambda x: not x.startswith("n't()")
-    return d03a("".join(filter(valid, (" " + whole).split("do"))))
+    xtail = lambda x: x.split("don't()")[0]
+    return d03a("_".join(map(xtail, whole.split("do()"))))

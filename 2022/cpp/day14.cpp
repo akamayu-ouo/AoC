@@ -94,8 +94,8 @@ int main (void) {
 	std::cout << fallen.size() << '\n';
 
 	walls.emplace_back();
-	walls.back().emplace_back(-1000,maxy+2);
-	walls.back().emplace_back( 1000,maxy+2);
+	walls.back().emplace_back(-100000,maxy+2);
+	walls.back().emplace_back( 100000,maxy+2);
 	while(Falling(walls, fallen, maxy+3)){};
 	std::cout << fallen.size() << '\n';
 
